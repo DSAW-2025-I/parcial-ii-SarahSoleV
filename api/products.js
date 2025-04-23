@@ -11,17 +11,14 @@ let products = [
 ];
 
 app.get('/products', (req, res) => res.json(products));
-
 app.get('/products/:id', (req, res) => {
   const product = products.find(p => p.id === +req.params.id);
   product ? res.json(product) : res.status(404).json({ error: 'Not found' });
 });
-
 app.post('/products', (req, res) => {
   const { id, name, price } = req.body;
   if (!id || !name || !price || products.some(p => p.id === id)) {
-    return res.status(400).json({ error: 'Invalid request' });
-  }
+    return res.status(400).json({ error: 'Invalid request' });}
   products.push(req.body);
   res.status(201).json(req.body);
 });
